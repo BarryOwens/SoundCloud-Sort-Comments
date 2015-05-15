@@ -1,0 +1,29 @@
+body {
+    background-color: #2A72AA;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+.btn {
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  background: #707070;
+  padding: 7px 15px 7px 15px;
+  border: solid #000000 2px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #005285;
+  text-decoration: none;
+}
+#container {
+	font-family: Helvetica, Arial, Sans-Serif;
+	min-width: 200;
+}
