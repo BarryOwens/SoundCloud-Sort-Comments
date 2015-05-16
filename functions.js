@@ -29,13 +29,13 @@ chrome.tabs.executeScript(null, {code: "var url = document.URL;url;"},
 			SC.get("/tracks/"+track_id+"/comments"
 			  , function (comments, err) {
 			  var output = "";
-			  // Sort the array by time occuring on track
+			  // Sort the array by time occurring on track
 			  comments.sort(compare);
 			  for (var i = 0; i < comments.length; i++) {
-					output += "user: " + comments[i].user.username + "<br>";
-				output += "comment: " + comments[i].body + "   " +msToTime(comments[i].timestamp)  +" <hr> ";
+					output +="<b> " +msToTime(comments[i].timestamp)  + "</b><br>";
+					output +="<b>" +comments[i].user.username +"</b>: " + comments[i].body    +" <hr> ";
 			  }
-			  $("#url").html(output);
+			  $("#comments").html(output);
 			});
 		  });
 	  });
@@ -63,9 +63,7 @@ function msToTime(duration) {
 	
 	if(hours=="00")
 		return minutes + ":" + seconds;
-	else{
+	else
 		return hours + ":" + minutes + ":" + seconds;
-	}
-    
 }
 

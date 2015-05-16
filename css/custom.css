@@ -5,18 +5,35 @@
  */
 
 body, section {			/* Change width and height to own preferences */
-	width: 500px;
+	width: 300px;
 	height: 400px;
 	overflow-x: hidden;
+	font-family:Arial, Helvetica, sans-serif;
 }
-#comments_input
-{
-	width:400px;
-	padding-top:5px;
+@font-face {
+	font-family:"glyphicons-halflings";
+	src: url("../fonts/glyphicons-halflings-regular.ttf") format("truetype");
 }
-#saved_doc_title
+#soundcloud_img{
+	background-image: url("../img/soundcloud-header.png");
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+#header{
+	background-color: #333;
+	height: 50px;
+	color: rgb(204, 204, 204);
+}
+#header_text{
+	padding-left: 70px;
+	padding-top: 15px;
+	font-size: 19px;
+}
+#comments
 {
-	color:#4D05CA;
+	
+
 }
 
 /* Basic style tweaks */
@@ -26,4 +43,4 @@ section { padding: 5px;}
 /* Scroll Bar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); }
-::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive  { background: red; }
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive  { background: #F60; }

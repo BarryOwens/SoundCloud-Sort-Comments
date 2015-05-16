@@ -2,16 +2,16 @@
   "manifest_version": 2,
 
   "name": "SoundCloud Comment Sort",
-  "description": "Sorts Soundcloud comments by time",
+  "description": "Shows Sorted Soundcloud Comments by Time on Track",
   "version": "1.0",
   "permissions": [
     "tabs",  "http://*/*", "https://*/*"
   ],
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "img/icon19.png",
     "default_popup": "popup.html"
   },
-  icons": { "16": "img/icon.png",
-           "48": "img/icon48.png",
-          "128": "img/icon128.png" },
+  "icons": { "16": "img/icon16.png",
+			 "48": "img/icon48.png",
+			 "128": "img/icon128.png" }
 }
