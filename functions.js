@@ -10,6 +10,7 @@ chrome.tabs.executeScript(null, {code: "var url = document.URL;url;"},
 	if(soundcloudCheck<0){
 		// TODO Update some error text that URL is incorrect
 		console.log('Not SoundCloud URL');
+		$("#comments").html("<br><br><b> Not a valid SoundCloud track URL </b><br><br>Make sure URL is similar to soundcloud.com/user/trackname");
 		return;
 	}
 	result[0].substring(soundcloudCheck+"soundcloud.com/".length,result[0].length)
