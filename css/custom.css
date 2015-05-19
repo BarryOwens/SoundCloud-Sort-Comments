@@ -1,18 +1,17 @@
 /**
- * Chrome Extension Twitter Bootstrap 3 Template
+ * Chrome Extension 
  * Custom CSS
  *	
  */
-
-body, section {			/* Change width and height to own preferences */
+body, section {			
 	width: 300px;
 	height: 400px;
-	overflow-x: hidden;
 	font-family:Arial, Helvetica, sans-serif;
 }
+/* Load some local fonts */
 @font-face {
-	font-family:"glyphicons-halflings";
-	src: url("../fonts/glyphicons-halflings-regular.ttf") format("truetype");
+	font-family:Generica;
+	src:local(minimalDisplay), url(../fonts/Generica.otf) format(opentype);
 }
 #soundcloud_img{
 	background-image: url("../img/soundcloud-header.png");
@@ -28,19 +27,15 @@ body, section {			/* Change width and height to own preferences */
 #header_text{
 	padding-left: 70px;
 	padding-top: 15px;
-	font-size: 19px;
+	font-size: 21px;
+	font-family:Generica,Arial, Helvetica, sans-serif;;
 }
-#comments
-{
-	
-
+/* Highlighted Text Color Change. Oh wow soundcloud orange so niice */
+::selection {
+    background-color: #F60;
+    color: #FFFFFF;
 }
-
-/* Basic style tweaks */
-section { padding: 5px;}
-.navbar { margin-bottom: 2px; }
-
-/* Scroll Bar */
+/* Scroll Bar. SoundcCloud Orange here too, ooo aaaa */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); }
 ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive  { background: #F60; }

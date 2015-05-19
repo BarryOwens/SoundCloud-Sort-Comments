@@ -4,17 +4,21 @@ SC.initialize({
 });
 // Get the URL when on SoundCloud
 chrome.tabs.executeScript(null, {code: "var url = document.URL;url;"},
-		function(result){
+function(result){
 	// Check that SoundCloud is being used
 	var soundcloudCheck=result[0].indexOf('soundcloud.com/');
 	if(soundcloudCheck<0){
-		// TODO Update some error text that URL is incorrect
-		console.log('Not SoundCloud URL');
-		$("#comments").html("<br><br><b> Not a valid SoundCloud track URL </b><br><br>Make sure URL is similar to soundcloud.com/user/trackname");
+		printErrorMessage();
 		return;
 	}
-	result[0].substring(soundcloudCheck+"soundcloud.com/".length,result[0].length)
-	var attributes=result[0].split('/');
+	var userNameTrackName=result[0]=result[0].substring(soundcloudCheck+"soundcloud.com/".length,result[0].length)
+	var attributes=userNameTrackName.split('/');
+	// Ensure a correct URL to a SoundCloud Track is used
+	if(attributes.length!=2){
+		printErrorMessage();
+		return;
+	}
+	// Extract the found Track and User
 	var track=attributes[attributes.length-1];
 	var user=attributes[attributes.length-2];
 	// Create a PATH to be used to gather information about the track
@@ -27,6 +31,11 @@ chrome.tabs.executeScript(null, {code: "var url = document.URL;url;"},
 			// obtain track's id
 			var duration = track.duration;
 			var track_id = track.id;
+			// If a bad URL was used, the Track ID will be null so show an error
+			if(track_id==undefined){
+				printErrorMessage();
+				return;
+			}
 			SC.get("/tracks/"+track_id+"/comments"
 			  , function (comments, err) {
 			  var output = "";
@@ -34,7 +43,7 @@ chrome.tabs.executeScript(null, {code: "var url = document.URL;url;"},
 			  comments.sort(compare);
 			  for (var i = 0; i < comments.length; i++) {
 					output +="<b> " +msToTime(comments[i].timestamp)  + "</b><br>";
-					output +="<b>" +comments[i].user.username +"</b>: " + comments[i].body    +" <hr> ";
+					output +="<b>" +comments[i].user.username +"</b>: " + comments[i].body    +" <br>  _____________________________________<br> "; // Use underscore instead of <hr> to allow css ::Selection to work
 			  }
 			  $("#comments").html(output);
 			});
@@ -66,5 +75,10 @@ function msToTime(duration) {
 		return minutes + ":" + seconds;
 	else
 		return hours + ":" + minutes + ":" + seconds;
+}
+// Error message to display for bad URL used
+function printErrorMessage()
+{
+	$("#comments").html("<br><br><b> Not a valid SoundCloud track URL </b><br><br>Make sure URL is similar to soundcloud.com/user/trackname");
 }
 
