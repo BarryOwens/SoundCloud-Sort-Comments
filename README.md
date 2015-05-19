@@ -1,10 +1,11 @@
 # SoundCloud-Sort-Comments
-Sort SoundCloud Comments By Time
+Sort SoundCloud Comments By Time Occurance on Track
+
 Download on Chrome here:
 https://chrome.google.com/webstore/detail/soundcloud-comments-sort/ndfgddnmlnfdmndljkmhbeaidfnijbcd
 
-Uses SoundCloud Javascript SDK to gather track information.
+Uses SoundCloud Javascript SDK to gather track information(Comments, Duration, Comment Timestamps).
 
-Comments and comment times are then extracted and printed to the Extension Popup.
+Comments and times are then extracted and printed in sorted order to the Extension Popup.
 
 
