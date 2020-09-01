@@ -1,54 +1,36 @@
-// Initialize SoundCloud API with key
-SC.initialize({
-    client_id: "02d54efe6695649f5c72cae57841e44a"
-});
 // Get the URL when on SoundCloud
 chrome.tabs.executeScript(null, {code: "var url = document.URL;url;"},
 function(result){
+	const currentURL = result[0];
 	// Check that SoundCloud is being used
 	var soundcloudCheck=result[0].indexOf('soundcloud.com/');
 	if(soundcloudCheck<0){
+		console.log('Not soundcloud url')
 		printErrorMessage();
 		return;
 	}
-	var userNameTrackName=result[0]=result[0].substring(soundcloudCheck+"soundcloud.com/".length,result[0].length)
-	var attributes=userNameTrackName.split('/');
-	// Ensure a correct URL to a SoundCloud Track is used
-	if(attributes.length!=2){
-		printErrorMessage();
-		return;
-	}
-	// Extract the found Track and User
-	var track=attributes[attributes.length-1];
-	var user=attributes[attributes.length-2];
-	// Create a PATH to be used to gather information about the track
-	var PATH = "/users/"+user+"/tracks/"+track;
-	$(document).ready(
-	  function () {
-		// Use SoundCloud API to get info of the track requested
-		SC.get(PATH
-		  , function (track, err) {
-			// obtain track's id
-			var duration = track.duration;
-			var track_id = track.id;
-			// If a bad URL was used, the Track ID will be null so show an error
-			if(track_id==undefined){
-				printErrorMessage();
-				return;
-			}
-			SC.get("/tracks/"+track_id+"/comments"
-			  , function (comments, err) {
-			  var output = "";
-			  // Sort the array by time occurring on track
-			  comments.sort(compare);
-			  for (var i = 0; i < comments.length; i++) {
-					output +="<b> " +msToTime(comments[i].timestamp)  + "</b><br>";
-					output +="<b>" +comments[i].user.username +"</b>: " + comments[i].body    +" <br>  _____________________________________<br> "; // Use underscore instead of <hr> to allow css ::Selection to work
-			  }
-			  $("#comments").html(output);
-			});
-		  });
-	  });
+	const baseURL = "https://api.soundcloud.com";
+	const clientId = "02d54efe6695649f5c72cae57841e44a";
+	// Get details about the track on the page
+	const trackDetailsURI = `${baseURL}/resolve?url=${currentURL}&client_id=${clientId}`
+	$.get(trackDetailsURI)
+	.then(trackData => {
+		const trackCommentsURI = `${baseURL}/tracks/${trackData.id}/comments?client_id=${clientId}` 
+		return $.get(trackCommentsURI)
+	})
+	.then(comments => {
+		var output = "";
+		// Sort the array by time occurring on track
+		comments.sort(compare);
+		for (var i = 0; i < comments.length; i++) {
+			output +="<b> " +msToTime(comments[i].timestamp)  + "</b><br>";
+			output +="<b>" +comments[i].user.username +"</b>: " + comments[i].body    +" <br>  _____________________________________<br> "; // Use underscore instead of <hr> to allow css ::Selection to work
+		}
+		$("#comments").html(output);
+	}).catch(err => {
+		console.error('err:', err);
+		alert("There was an error getting comments")
+	})
 });
 
 // Compare function used to sort comments array by timestamp

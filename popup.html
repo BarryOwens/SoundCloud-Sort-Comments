@@ -1,21 +1,27 @@
 <html>
-  <head>
-    <!-- Load jQuery-->
-    <script src="jquery-1.7.2.min.js"></script>
-	<!-- Load CSS -->
-	<link rel="stylesheet" type="text/css" href="css/custom.css">
-    <!-- Load Soundcloud SDK -->
-    <script src="sc_sdk.js"></script>
-    <!-- Source Javascript file which uses Soundcloud API -->
-    <script src="functions.js"></script>
-  </head>
-  <body>
-	<div id='container'>
-		<div id='header'>
-			<div id='soundcloud_img'> </div>			
-			<div id='header_text'>  Time Sorted Comments </div>
-		</div>
-		<div id='comments'> </div>
-	</div>
-  </body>
+
+<head>
+  <!-- Load jQuery-->
+  <script src="jquery.js"></script>
+  <!-- Load CSS -->
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <!-- Source Javascript file which uses Soundcloud API -->
+  <script src="functions.js"></script>
+</head>
+
+<body>
+  <div id='container'>
+    <div id='header'>
+      <div id='soundcloud_img'> </div>
+      <div id='header_text'> Time Sorted Comments </div>
+    </div>
+    <div id='comments'>
+      <br><br><b> Not a valid SoundCloud track URL or unable to extract comments</b><br><br>Make sure URL is similar to
+      soundcloud.com/user/trackname
+      <br><br> If the URL is in this format, comments for this track cannot be extracted and sorted
+
+    </div>
+  </div>
+</body>
+
 </html>
